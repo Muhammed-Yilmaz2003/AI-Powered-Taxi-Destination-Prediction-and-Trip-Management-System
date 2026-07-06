@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Taxi Trip Management Workspace</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+    <div id="map"></div>
+    
+    <div class="dashboard">
+        <div class="header-row">
+            <h2>SF Taxi Operations</h2>
+            <button id="themeToggle">🌙 Dark Mode</button>
+        </div>
+        <p>Live ML spatial accuracy target: <strong>~2.04km model error</strong></p>
+        <div style="flex: 1; overflow-y: auto;">
+            <table id="logTable">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Coordinates</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="logBody"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

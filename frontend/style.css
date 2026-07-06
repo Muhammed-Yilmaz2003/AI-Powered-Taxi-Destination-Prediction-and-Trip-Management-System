@@ -1,0 +1,140 @@
+:root {
+    --bg-color: #f8f9fa;
+    --panel-bg: white;
+    --text-main: #212529;
+    --text-muted: #6c757d;
+    --border-color: #dee2e6;
+    --table-header: #f1f3f5;
+    --btn-bg: white;
+    --btn-hover: #e9ecef;
+}
+
+[data-theme="dark"] {
+    --bg-color: #121212;
+    --panel-bg: #1e1e1e;
+    --text-main: #e8eaed;
+    --text-muted: #9aa0a6;
+    --border-color: #3c4043;
+    --table-header: #2d2e30;
+    --btn-bg: #2b2b2b;
+    --btn-hover: #3d3d3d;
+}
+
+body { 
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
+    margin: 0; 
+    padding: 20px; 
+    display: flex; 
+    gap: 20px; 
+    height: 100vh; 
+    box-sizing: border-box; 
+    background: var(--bg-color); 
+    color: var(--text-main);
+    transition: background 0.3s, color 0.3s;
+}
+#map { 
+    flex: 2; 
+    border-radius: 8px; 
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1); 
+}
+.dashboard { 
+    flex: 1; 
+    background: var(--panel-bg); 
+    padding: 20px; 
+    border-radius: 8px; 
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1); 
+    display: flex; 
+    flex-direction: column;
+    transition: background 0.3s;
+}
+
+.header-row { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    margin-bottom: 5px;
+}
+h2 { 
+    margin: 0; 
+}
+p { 
+    margin: 0 0 15px 0; 
+    color: var(--text-muted); 
+    font-size: 0.95rem; 
+}
+
+table { 
+    width: 100%; 
+    border-collapse: collapse; 
+    font-size: 0.85rem; 
+}
+th, td { 
+    padding: 10px; 
+    border-bottom: 1px solid var(--border-color); 
+    text-align: left; 
+}
+th { 
+    background-color: var(--table-header); 
+}
+
+.status { 
+    padding: 3px 6px; 
+    border-radius: 4px; 
+    font-size: 0.75rem; 
+    font-weight: bold; 
+    text-transform: uppercase; 
+    color: #fff;
+}
+.status-pending { 
+    background: #f39c12; 
+}
+.status-completed { 
+    background: #28a745; 
+}
+.status-cancelled { 
+    background: #6c757d; 
+}
+
+.btn { 
+    padding: 4px 8px; 
+    cursor: pointer; 
+    border: 1px solid var(--border-color); 
+    border-radius: 4px; 
+    margin-right: 4px; 
+    background: var(--btn-bg); 
+    color: var(--text-main);
+}
+.btn:hover { 
+    background: var(--btn-hover); 
+}
+.btn-del { 
+    color: #dc3545; 
+}
+
+#themeToggle {
+    background: none;
+    border: 1px solid var(--border-color); 
+    padding: 5px 10px;
+    border-radius: 20px; 
+    cursor: pointer; 
+    color: var(--text-main); 
+    font-size: 0.9rem;
+}
+#themeToggle:hover { 
+    background: var(--btn-hover); 
+}
+
+@media (max-width: 768px) {
+    body {
+        flex-direction: column; 
+        padding: 10px;          
+    }
+    #map {
+        flex: none;             
+        height: 50vh;           
+        min-height: 300px;
+    }
+    .dashboard {
+        flex: 1;                
+    }
+}
