@@ -10,14 +10,22 @@ import routes
 database.init_db()
 
 app = FastAPI(
-    title="AI-Powered Taxi System Backend",
+    title="AI-Powered Taxi Prediction System Backend",
     description="Inference and CRUD engine",
     version="1.0.0"
 )
 
+origins = [
+    "http://localhost:3000",
+    "http://localhost:5500",
+    "http://127.0.0.1:3000",
+    "http://127.0.0.1:5500",
+    "https://your-frontend-app.vercel.app"
+]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],
+    allow_origins=origins,
     allow_credentials=True,
     allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allow_headers=["*"],
