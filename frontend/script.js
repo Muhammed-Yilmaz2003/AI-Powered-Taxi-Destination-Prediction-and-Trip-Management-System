@@ -23,13 +23,32 @@ themeBtn.addEventListener('click', () => {
     tileLayer.setUrl(currentTheme === 'dark' ? darkTiles : lightTiles);
 });
 
-const isLocal = window.location.hostname === "127.0.0.1" || window.location.hostname === "localhost" || window.location.protocol === "file:";
-const BACKEND_URL = isLocal ? "http://127.0.0.1:8000" : "https://your-backend-app.onrender.com"; 
+const CONFIG = {
+    local: { apiUrl: "http://127.0.0.1:8000" },
+    production: { apiUrl: "https://your-backend-app.onrender.com" }
+};
+
+const isLocal = window.location.hostname === "127.0.0.1" || 
+                window.location.hostname === "localhost" || 
+                window.location.protocol === "file:";
+
+const BACKEND_URL = isLocal ? CONFIG.local.apiUrl : CONFIG.production.apiUrl;
+
+async function apiRequest(endpoint, method = 'GET', body = null) {
+    const options = {
+        method,
+        headers: { "Content-Type": "application/json" }
+    };
+    if (body) options.body = JSON.stringify(body);
+    
+    const res = await fetch(`${BACKEND_URL}${endpoint}`, options);
+    if (!res.ok) throw new Error(`API Error: ${res.status}`);
+    return await res.json();
+}
 
 async function fetchLogs() {
     try {
-        const res = await fetch(`${BACKEND_URL}/trips/`);
-        const data = await res.json();
+        const data = await apiRequest('/trips/');
         const tbody = document.getElementById("logBody");
         tbody.innerHTML = data.map(t => `
             <tr>
@@ -45,6 +64,25 @@ async function fetchLogs() {
         `).join('');
     } catch(e) {
         console.error("Backend offline or CORS issue.", e);
+    }
+}
+
+async function updateTrip(id, status) {
+    try {
+        await apiRequest(`/trips/${id}`, 'PUT', { status });
+        fetchLogs();
+    } catch(e) {
+        console.error("Failed to update trip:", e);
+    }
+}
+
+async function deleteTrip(id) {
+    try {
+        await apiRequest(`/trips/${id}`, 'DELETE');
+        activeRoute.clearLayers();
+        fetchLogs();
+    } catch(e) {
+        console.error("Failed to delete trip:", e);
     }
 }
 
@@ -82,22 +120,5 @@ map.on('click', async (e) => {
         console.error("Failed inference request", err);
     }
 });
-
-async function updateTrip(id, status) {
-    await fetch(`${BACKEND_URL}/trips/${id}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json"},
-        body: JSON.stringify({ status })
-    });
-    fetchLogs();
-}
-
-async function deleteTrip(id) {
-    await fetch(`${BACKEND_URL}/trips/${id}`, {
-        method: "DELETE"
-    });
-    activeRoute.clearLayers();
-    fetchLogs();
-}
 
 fetchLogs();
