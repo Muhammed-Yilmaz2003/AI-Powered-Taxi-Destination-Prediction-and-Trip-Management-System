@@ -1,11 +1,11 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from dotenv import load_dotenv
+#from dotenv import load_dotenv
 
 import database
 import routes 
 
-load_dotenv()
+#load_dotenv()
 
 database.init_db()
 
