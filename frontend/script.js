@@ -25,7 +25,7 @@ themeBtn.addEventListener('click', () => {
 
 const CONFIG = {
     local: { apiUrl: "http://127.0.0.1:8000" },
-    production: { apiUrl: "https://your-backend-app.onrender.com" }
+    production: { apiUrl: "https://ai-taxi-dest-backend.onrender.com" }
 };
 
 const isLocal = window.location.hostname === "127.0.0.1" || 
