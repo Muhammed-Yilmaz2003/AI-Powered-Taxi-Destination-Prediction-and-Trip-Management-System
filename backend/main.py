@@ -20,7 +20,7 @@ origins = [
     "http://localhost:5500",
     "http://127.0.0.1:3000",
     "http://127.0.0.1:5500",
-    "https://your-frontend-app.vercel.app"
+    "https://ai-powered-taxi-destination-predict.vercel.app"
 ]
 
 app.add_middleware(
