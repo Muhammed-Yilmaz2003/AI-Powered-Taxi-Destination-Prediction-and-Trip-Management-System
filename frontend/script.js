@@ -1,3 +1,73 @@
+//config
+const CONFIG = {
+    local: { apiUrl: "http://127.0.0.1:8000" },
+    production: { apiUrl: "https://ai-taxi-dest-backend.onrender.com" } 
+};
+
+const isLocal = window.location.hostname === "127.0.0.1" || 
+                window.location.hostname === "localhost" || 
+                window.location.protocol === "file:";
+
+const BACKEND_URL = isLocal ? CONFIG.local.apiUrl : CONFIG.production.apiUrl;
+
+
+//loading screen
+const loadingOverlay = document.getElementById("loading-overlay");
+const mainApp = document.getElementById("main-app");
+const loadingText = document.getElementById("loading-text");
+const loadingError = document.getElementById("loading-error");
+const spinner = document.querySelector(".spinner");
+
+const loadingMessages = [
+    "Connecting to cloud backend...",
+    "Waking up FastAPI server (Render free tier sleeps after 15m)...",
+    "Loading San Francisco geospatial data...",
+    "Initializing XGBoost machine learning model...",
+    "Almost there, warming up the inference engine..."
+];
+
+let messageIndex = 0;
+const messageInterval = setInterval(() => {
+    messageIndex = (messageIndex + 1) % loadingMessages.length;
+    if (loadingText) loadingText.innerText = loadingMessages[messageIndex];
+}, 6000); 
+
+const failureTimeout = setTimeout(() => {
+    clearInterval(messageInterval);
+    if (spinner) spinner.style.display = "none";
+    if (loadingText) {
+        loadingText.innerText = "Backend failed to wake up.";
+        loadingText.style.color = "#ff6b6b"; 
+    }
+    if (loadingError) {
+        loadingError.style.display = "block";
+        loadingError.innerText = "Please refresh the page to try again, or check your Render dashboard.";
+    }
+}, 90000);
+
+async function wakeUpBackend() {
+    try {
+        const response = await fetch(`${BACKEND_URL}/docs`);
+        
+        if (response.ok) {
+            clearInterval(messageInterval); 
+            clearTimeout(failureTimeout);   
+            if (loadingOverlay) loadingOverlay.style.display = "none";
+            if (mainApp) {
+                mainApp.style.display = "block";
+                map.invalidateSize();
+            }
+            fetchLogs();
+        } else {
+            throw new Error("Server not ready");
+        }
+    } catch (error) {
+        setTimeout(wakeUpBackend, 3000);
+    }
+}
+
+
+//leaflet map behavior
 const htmlEl = document.documentElement;
 const themeBtn = document.getElementById('themeToggle');
 
@@ -23,17 +93,8 @@ themeBtn.addEventListener('click', () => {
     tileLayer.setUrl(currentTheme === 'dark' ? darkTiles : lightTiles);
 });
 
-const CONFIG = {
-    local: { apiUrl: "http://127.0.0.1:8000" },
-    production: { apiUrl: "https://ai-taxi-dest-backend.onrender.com" }
-};
 
-const isLocal = window.location.hostname === "127.0.0.1" || 
-                window.location.hostname === "localhost" || 
-                window.location.protocol === "file:";
-
-const BACKEND_URL = isLocal ? CONFIG.local.apiUrl : CONFIG.production.apiUrl;
-
+//crud requests
 async function apiRequest(endpoint, method = 'GET', body = null) {
     const options = {
         method,
@@ -120,5 +181,5 @@ map.on('click', async (e) => {
         console.error("Failed inference request", err);
     }
 });
-
-fetchLogs();
+//start the backend
+wakeUpBackend();
