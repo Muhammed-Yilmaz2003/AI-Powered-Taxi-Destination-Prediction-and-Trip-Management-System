@@ -124,6 +124,79 @@ th {
     background: var(--btn-hover); 
 }
 
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #121212;
+  color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999; 
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  transition: opacity 0.8s ease-out; 
+}
+
+.loading-content {
+  text-align: center;
+  max-width: 500px;
+  padding: 20px;
+}
+
+.spinner {
+  width: 55px;
+  height: 55px;
+  border: 5px solid rgba(255, 255, 255, 0.1);
+  border-top-color: #009688; 
+  border-radius: 50%;
+  animation: spin 1s cubic-bezier(0.55, 0.15, 0.45, 0.85) infinite;
+  margin: 0 auto 25px auto;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.loading-text {
+  font-size: 1.1rem;
+  color: #a0a0b0;
+  height: 30px; 
+  margin-bottom: 30px;
+  transition: opacity 0.3s ease; 
+}
+
+.tech-stack-badges {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 25px;
+}
+
+.badge {
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.python-badge { background-color: #3776AB; color: white; }
+.fastapi-badge { background-color: #009688; color: white; }
+.ml-badge { background-color: #1296DB; color: white; }
+.render-badge { background-color: #46E3B7; color: black; }
+
+.loading-error {
+  color: #ff6b6b;
+  margin-top: 20px;
+  font-weight: bold;
+  background: rgba(255, 107, 107, 0.1);
+  padding: 15px;
+  border-radius: 8px;
+}
+
 @media (max-width: 768px) {
     body {
         flex-direction: column; 
