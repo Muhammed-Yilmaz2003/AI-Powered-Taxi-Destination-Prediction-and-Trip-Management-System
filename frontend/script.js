@@ -20,7 +20,7 @@ const spinner = document.querySelector(".spinner");
 
 const loadingMessages = [
     "Connecting to cloud backend...",
-    "Waking up FastAPI server (Render free tier sleeps after 15m)...",
+    "Waking up FastAPI server...",
     "Loading San Francisco geospatial data...",
     "Initializing XGBoost machine learning model...",
     "Almost there, warming up the inference engine..."
@@ -41,7 +41,7 @@ const failureTimeout = setTimeout(() => {
     }
     if (loadingError) {
         loadingError.style.display = "block";
-        loadingError.innerText = "Please refresh the page to try again, or check your Render dashboard.";
+        loadingError.innerText = "Please refresh the page to try again.";
     }
 }, 90000);
 
