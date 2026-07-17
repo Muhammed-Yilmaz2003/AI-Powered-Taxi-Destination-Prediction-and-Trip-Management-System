@@ -192,6 +192,7 @@ th {
   gap: 8px; 
   padding: 8px 16px;
   border-radius: 20px;
+  border: 2px solid white;
   font-size: 0.85rem;
   font-weight: 600;
   letter-spacing: 0.5px;
@@ -206,7 +207,7 @@ th {
 .fastapi-badge { background-color: #009688; color: white; }
 .ml-badge { background-color: #F7931E; color: white; }
 .render-badge { background-color: #46E3B7; color: black; }
-.vercel-badge { background-color: #121212; color: white; }
+.vercel-badge { background-color: #121212; color: white;}
 
 @media (max-width: 768px) {
     body {
