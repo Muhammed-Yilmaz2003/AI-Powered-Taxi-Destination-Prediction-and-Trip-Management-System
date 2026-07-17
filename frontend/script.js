@@ -55,7 +55,9 @@ async function wakeUpBackend() {
             if (loadingOverlay) loadingOverlay.style.display = "none";
             if (mainApp) {
                 mainApp.style.display = "block";
-                map.invalidateSize();
+                setTimeout(() => {
+                    map.invalidateSize();
+                }, 100);
             }
             fetchLogs();
         } else {
@@ -67,7 +69,7 @@ async function wakeUpBackend() {
 }
 
 
-//leaflet map behavior
+//leaflet map initialization
 const htmlEl = document.documentElement;
 const themeBtn = document.getElementById('themeToggle');
 
@@ -146,7 +148,7 @@ async function deleteTrip(id) {
         console.error("Failed to delete trip:", e);
     }
 }
-
+//map behavior
 map.on('click', async (e) => {
     if (e.originalEvent) {
         e.originalEvent.preventDefault();
