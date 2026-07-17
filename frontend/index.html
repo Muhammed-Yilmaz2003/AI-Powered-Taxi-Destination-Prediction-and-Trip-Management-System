@@ -4,13 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Taxi Trip Management Workspace</title>
+    <!--CSS-->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-
+    <!--Loading Overlay for Backend Startup-->
+    <div id="loading-overlay" class="loading-overlay">
+        <div class="loading-content">
+            <div class="spinner"></div>
+            <h2 id="loading-title">Waking up the backend</h2>
+            <p id="loading-text" class="loading-text">Connecting To The Render Cloud Infrastructure...</p>
+            <!--Decorative Skill Badges For Loading Overlay-->
+            <div class="tech-stack-badges">
+                <span class="badge python-badge">Python</span>
+                <span class="badge fastapi-badge">FastAPI</span>
+                <span class="badge ml-badge">XGBoost</span>
+                <span class="badge render-badge">Render (For Backend)</span>
+                <span class="badge vercel-badge">Vercel (For Frontend)</span>
+            </div>
+            <!--Fallback For Loading Error-->
+            <p id="loading-error" class="loading-error" style="display: none;">
+            /!\ The server is taking too long to wake up. Please refresh or check back later.
+            </p>
+        </div>
+    </div>
+    <!--Map UI-->
     <div id="map"></div>
-    
+    <!--Taxi Trip Management Dashboard-->
     <div class="dashboard">
         <div class="header-row">
             <h2>SF Taxi Operations</h2>
@@ -31,7 +52,7 @@
             </table>
         </div>
     </div>
-
+    <!--Scripts-->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="script.js"></script>
 </body>
