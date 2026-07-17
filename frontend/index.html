@@ -10,46 +10,46 @@
 </head>
 <body>
     <!--Loading Overlay for Backend Startup-->
-    <div id="loading-overlay" class="loading-overlay">
+    <div id="loading-overlay">
         <div class="loading-content">
             <div class="spinner"></div>
-            <h2 id="loading-title">Waking up the backend</h2>
-            <p id="loading-text" class="loading-text">Connecting To The Render Cloud Infrastructure...</p>
-            <!--Decorative Skill Badges For Loading Overlay-->
+            <h2 id="loading-text">Connecting To The Backend...</h2>
+      
             <div class="tech-stack-badges">
-                <span class="badge python-badge">Python</span>
-                <span class="badge fastapi-badge">FastAPI</span>
-                <span class="badge ml-badge">XGBoost</span>
-                <span class="badge render-badge">Render (For Backend)</span>
-                <span class="badge vercel-badge">Vercel (For Frontend)</span>
+                <span class="badge python-badge"><img src="https://cdn.simpleicons.org/python/white" class="badge-icon"> Python</span>
+                <span class="badge fastapi-badge"><img src="https://cdn.simpleicons.org/fastapi/white" class="badge-icon"> FastAPI</span>
+                <span class="badge ml-badge"><img src="https://cdn.simpleicons.org/scikitlearn/white" class="badge-icon"> ML / XGBoost</span>
+                <span class="badge render-badge"><img src="https://cdn.simpleicons.org/render/black" class="badge-icon"> Render</span>
+                <span class="badge vercel-badge"><img src="https://cdn.simpleicons.org/vercel/black" class="badge-icon"> Vercel</span>
             </div>
-            <!--Fallback For Loading Error-->
-            <p id="loading-error" class="loading-error" style="display: none;">
-            /!\ The server is taking too long to wake up. Please refresh or check back later.
-            </p>
+
+            <p id="loading-error" style="display: none;"></p>
         </div>
     </div>
-    <!--Map UI-->
-    <div id="map"></div>
-    <!--Taxi Trip Management Dashboard-->
-    <div class="dashboard">
-        <div class="header-row">
-            <h2>SF Taxi Operations</h2>
-            <button id="themeToggle">🌙 Dark Mode</button>
-        </div>
-        <p>Live ML spatial accuracy target: <strong>~2.04km model error</strong></p>
-        <div style="flex: 1; overflow-y: auto;">
-            <table id="logTable">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Coordinates</th>
-                        <th>Status</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody id="logBody"></tbody>
-            </table>
+    <!--Main Application-->
+    <div id="main-app" style="display: none;">
+        <!--Map UI-->
+        <div id="map"></div>
+        <!--Taxi Trip Management Dashboard-->
+        <div class="dashboard">
+            <div class="header-row">
+                <h2>SF Taxi Operations</h2>
+                <button id="themeToggle">🌙 Dark Mode</button>
+            </div>
+            <p>Live ML spatial accuracy target: <strong>~2.04km model error</strong></p>
+            <div style="flex: 1; overflow-y: auto;">
+                <table id="logTable">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Coordinates</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="logBody"></tbody>
+                </table>
+            </div>
         </div>
     </div>
     <!--Scripts-->
