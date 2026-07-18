@@ -54,10 +54,10 @@ async function wakeUpBackend() {
             clearTimeout(failureTimeout);   
             if (loadingOverlay) loadingOverlay.style.display = "none";
             if (mainApp) {
-                mainApp.style.display = "block";
+                mainApp.style.display = "flex";
                 setTimeout(() => {
                     map.invalidateSize();
-                }, 100);
+                }, 200);
             }
             fetchLogs();
         } else {
@@ -183,5 +183,5 @@ map.on('click', async (e) => {
         console.error("Failed inference request", err);
     }
 });
-//start the backend
+//start or call the backend
 wakeUpBackend();

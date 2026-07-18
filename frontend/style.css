@@ -23,22 +23,35 @@
 body { 
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
     margin: 0; 
-    padding: 20px; 
-    display: flex; 
-    gap: 20px; 
-    height: 100vh; 
-    box-sizing: border-box; 
+    padding: 0;
+    height: 100vh;
     background: var(--bg-color); 
     color: var(--text-main);
     transition: background 0.3s, color 0.3s;
 }
+
+#main-app { 
+    display: flex; 
+    flex-direction: row; 
+    width: 100vw;        
+    height: 100vh;       
+    padding: 20px; 
+    gap: 20px; 
+    box-sizing: border-box;
+    overflow: hidden; 
+}
+
 #map { 
     flex: 2; 
+    height: 100%; 
+    min-width: 300px; 
     border-radius: 8px; 
     box-shadow: 0 4px 6px rgba(0,0,0,0.1); 
 }
+
 .dashboard { 
     flex: 1; 
+    min-width: 300px; 
     background: var(--panel-bg); 
     padding: 20px; 
     border-radius: 8px; 
@@ -46,6 +59,8 @@ body {
     display: flex; 
     flex-direction: column;
     transition: background 0.3s;
+    overflow: hidden; 
+    box-sizing: border-box;
 }
 
 .header-row { 
@@ -57,6 +72,7 @@ body {
 h2 { 
     margin: 0; 
 }
+
 p { 
     margin: 0 0 15px 0; 
     color: var(--text-muted); 
@@ -68,11 +84,13 @@ table {
     border-collapse: collapse; 
     font-size: 0.85rem; 
 }
+
 th, td { 
     padding: 10px; 
     border-bottom: 1px solid var(--border-color); 
     text-align: left; 
 }
+
 th { 
     background-color: var(--table-header); 
 }
@@ -85,12 +103,15 @@ th {
     text-transform: uppercase; 
     color: #fff;
 }
+
 .status-pending { 
     background: #f39c12; 
 }
+
 .status-completed { 
     background: #28a745; 
 }
+
 .status-cancelled { 
     background: #6c757d; 
 }
@@ -104,9 +125,11 @@ th {
     background: var(--btn-bg); 
     color: var(--text-main);
 }
+
 .btn:hover { 
     background: var(--btn-hover); 
 }
+
 .btn-del { 
     color: #dc3545; 
 }
@@ -120,6 +143,7 @@ th {
     color: var(--text-main); 
     font-size: 0.9rem;
 }
+
 #themeToggle:hover { 
     background: var(--btn-hover); 
 }
@@ -144,7 +168,6 @@ th {
   max-width: 600px;
   padding: 20px;
 }
-
 
 .spinner {
   width: 60px;
@@ -209,17 +232,23 @@ th {
 .render-badge { background-color: #46E3B7; color: black; }
 .vercel-badge { background-color: #121212; color: white;}
 
-@media (max-width: 768px) {
-    body {
+@media (max-width: 900px) { 
+    #main-app {
         flex-direction: column; 
-        padding: 10px;          
+        overflow-y: auto;       
+        height: auto;           
     }
+
     #map {
-        flex: none;             
+        flex: none; 
+        width: 100%;
         height: 50vh;           
-        min-height: 300px;
+        min-height: 350px;      
     }
+
     .dashboard {
-        flex: 1;                
+        flex: none;
+        width: 100%;
+        min-width: 0;          
     }
 }
