@@ -3,6 +3,8 @@ An end-to-end geospatial machine learning application that predicts destination 
 
 The project is deployed on Render for the backend, and on Vercel for the frontend.
 
+*Note: since the backend is deployed on render's free tier, it might take 30-50 seconds for it to wake up.*
+
 ## Live Demo
 [![Live Demo](https://img.shields.io/badge/Demo-Live_App-2ea44f?style=for-the-badge)](https://ai-powered-taxi-destination-predict.vercel.app/)
 
@@ -21,12 +23,13 @@ The project is deployed on Render for the backend, and on Vercel for the fronten
 * **Trip Operations (CRUD):** Embedded SQLite log system enabling real-time status updates (`pending`, `completed`, `cancelled`) and record deletion.
 * **Decoupled Architecture:** Backend designed for Render (FastAPI/Uvicorn) and frontend for Vercel.
 * **Cold-Start Resilience:** Custom UI loading state that gracefully handles cloud-provider (Render) spin-up latency with backend polling.
-<!--
+
 ## Preview
 
-![App Screenshot](this is where my image will be)
+![image](assets/prediction_demo.gif)
 *Interactive Leaflet UI displaying geospatial ML predictions in real-time.*
--->
+
+
 ## Project Structure
 
 ```text
@@ -130,6 +133,17 @@ The backend exposes the following REST API endpoints to handle live taxi operati
 | `DELETE`| `/trips/{id}`| Remotely removes a specific trip log entry via the UI delete button panel. |
 
 FastAPI provides automatic documentation through Swagger UI, which can be accessed by going to http://127.0.0.1:8000/docs.
+
+## Model Training 
+
+The model was trained on google colab.
+
+* Utilizes the XGBoost framework, and specifically implements the XGBoost Regressor model.
+* The target/core features are the destination coordinates (Latitude,Longitude).
+
+If you want to view/use the training code, you can run the *training/Model_Training.ipynb* inside google colab along with the dataset that you can get from IEE Dataport (reference below). 
+
+If you do choose to run the exact code, then make sure you *unzip the dataset tar file* then go inside the new folder and zip the folder inside, *cabspottingdata*, then put it inside google colab and run the code.
 
 ## Dataset Reference & Citation
 
